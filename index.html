@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Compound Interest Calculator</title>
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#f4f6f8;
+padding:40px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#2c7be5;
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1a68d1;
+}
+
+.result{
+margin-top:20px;
+font-size:18px;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Compound Interest Calculator</h2>
+
+<label>Initial Investment ($)</label>
+<input id="initial" type="number" placeholder="3000">
+
+<label>Monthly Contribution ($)</label>
+<input id="monthly" type="number" placeholder="1000">
+
+<label>Annual Return (%)</label>
+<input id="rate" type="number" placeholder="12">
+
+<label>Years</label>
+<input id="years" type="number" placeholder="15">
+
+<label>Annual Increase of Contribution (%)</label>
+<input id="increase" type="number" placeholder="10">
+
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+function calculate(){
+
+let initial = parseFloat(document.getElementById("initial").value);
+let monthly = parseFloat(document.getElementById("monthly").value);
+let rate = parseFloat(document.getElementById("rate").value)/100;
+let years = parseFloat(document.getElementById("years").value);
+let increase = parseFloat(document.getElementById("increase").value)/100;
+
+let balance = initial;
+
+for(let y=1;y<=years;y++){
+
+for(let m=1;m<=12;m++){
+
+balance += monthly;
+balance *= (1 + rate/12);
+
+}
+
+monthly = monthly * (1 + increase);
+
+}
+
+document.getElementById("result").innerHTML =
+"Final Value: $" + balance.toLocaleString(undefined,{maximumFractionDigits:0});
+
+}
+
+</script>
+
+</body>
+</html>
